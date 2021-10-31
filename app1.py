@@ -7,6 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import pickle
 import streamlit as st 
+import time
 
 pickle_in = open("predictor.pkl","rb")
 predictor=pickle.load(pickle_in)
@@ -65,7 +66,7 @@ def main():
     <h2 style="color:white;text-align:center;">Diabetes Prediction App </h2>
     </div>
     """
-
+    
     #Pregnancies	Glucose	BloodPressure	SkinThickness	Insulin	BMI	 Age
     st.markdown(html_temp,unsafe_allow_html=True)
 
@@ -88,9 +89,27 @@ def main():
             neg = "Your results look good. You are healthy and not at risk for diabetes :)"
             st.success('{}'.format(neg))
 
+    with st.spinner('Almost done...'):
+      time.sleep(2)
+      st.success('Done!,Thank you for using this app!')
+
+
+    st.info("Caution: This is just a prediction and not doctoral advice. Kindly see a doctor if you feel the symptoms persist.")
+
     if st.button("About"):
         st.text("Lets LEarn")
         st.text("Built with Streamlit")
+
+st.sidebar.subheader("About App")
+
+st.sidebar.info(
+    "This web app uses some powerful Machine-Learning techniques and  helps you to find out whether you are at a risk of diagnosing diabetes.")
+st.sidebar.info(
+    "Enter the required fields and click on the 'Predict' button to check whether you have a healthy heart")
+
+
+
+
 
 if __name__=='__main__':
     main()
